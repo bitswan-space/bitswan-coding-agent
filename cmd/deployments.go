@@ -63,11 +63,10 @@ var deploymentsStartCmd = &cobra.Command{
 			return fmt.Errorf("cannot detect worktree: %w", err)
 		}
 
-		body := map[string]string{"deployment_id": deploymentID}
-		path := fmt.Sprintf("/deployments/start?worktree=%s", worktree)
+		path := fmt.Sprintf("/deployments/%s/start?worktree=%s", deploymentID, worktree)
 
 		var result map[string]interface{}
-		if err := agentRequestJSON("POST", path, body, &result); err != nil {
+		if err := agentRequestJSON("POST", path, nil, &result); err != nil {
 			return err
 		}
 
